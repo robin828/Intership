@@ -1,93 +1,41 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
+import React from 'react'
+import Lottie from 'react-lottie'
+import {makeStyles} from '@material-ui/core/styles'
+import Grid from '@material-ui/core/grid'
+import { Button } from '@material-ui/core'
+import { red } from '@material-ui/core/colors'
 
-const StyledMenu = withStyles({
-  paper: {
-    border: '1px solid #d3d4d5',
-  },
-})((props) => (
-  <Menu
-    elevation={0}
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: 'bottom',
-      horizontal: 'center',
-    }}
-    transformOrigin={{
-      vertical: 'top',
-      horizontal: 'center',
-    }}
-    {...props}
-  />
-));
+const useStyles = makeStyles(theme=>({
 
-const StyledMenuItem = withStyles((theme) => ({
-  root: {
-    '&:focus': {
-      backgroundColor: theme.palette.primary.main,
-      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-        color: theme.palette.common.white,
-      },
-    },
-  },
-}))(MenuItem);
-
-export default function CustomizedMenus() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  return (
-    <div>
-      <Button
-        aria-controls="customized-menu"
-        aria-haspopup="true"
-        variant="contained"
-        color="primary"
-        onClick={handleClick}
-      >
-        Open Menu
-      </Button>
-      <StyledMenu
-        id="customized-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      >
-        <StyledMenuItem>
-          <ListItemIcon>
-            <SendIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Sent mail" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-            <DraftsIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Drafts" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-            <InboxIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Inbox" />
-        </StyledMenuItem>
-      </StyledMenu>
-    </div>
-  );
+}))
+const Landing = () => {
+    const classes = useStyles();
+   
+    return (
+        <>
+            <Grid container direction="column">
+                <Grid item>
+                    <div variant="outline" backgroundColor="red"></div>
+                    <Grid container direction="row">
+                        <Grid item>
+                            <div>Bringing West Coast Technology<br />to the Midwest</div>
+                            <Grid container>
+                                <Grid item>
+                                    <Button variant="contained">Free Estimste</Button>
+                                </Grid>
+                                <Grid item>
+                                    <Button variant="outlined">Learn More</Button>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid item>
+                        <div variant="outline" backgroundColor="green"></div>
+                        </Grid>                           
+                    </Grid>
+                </Grid>
+            </Grid>
+        </>
+    )
 }
+
+export default Landing
