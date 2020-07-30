@@ -1,7 +1,6 @@
 import React from 'react'
 import Lottie from 'react-lottie'
 import {makeStyles} from '@material-ui/core/styles'
-import animationData from '../animations/landinganimation/data'
 import Grid from '@material-ui/core/grid'
 import { Button } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
@@ -48,7 +47,7 @@ const Landing = () => {
     const defaultOptions = {
         loop: true,
         autoplay: true, 
-        animationData: animationData,
+        
         rendererSettings: {
           preserveAspectRatio: 'xMidYMid slice'
         }

@@ -1,9 +1,6 @@
 import React from 'react'
 import {makeStyles} from '@material-ui/styles'
-import footerAdornment from '../../assets/Footer Adornment.svg'
-import facebook from '../../assets/facebook.svg'
-import instagram from '../../assets/instagram.svg'
-import twitter from '../../assets/twitter.svg'
+
 import Grid from '@material-ui/core/grid'
 import Hidden from '@material-ui/core/Hidden'
 import {Link} from 'react-router-dom'
@@ -119,19 +116,9 @@ const Footer = (props) => {
                         </Grid>
                     </Grid>
                 </Hidden>
-                <img src={footerAdornment} alt="Footer" className={classes.adornment}/>
+                
 
-                <Grid container spacing={2} justify="flex-end" className={classes.socialContainer}>
-                    <Grid item component={"a"} href="http://www.facebook.com" rel="noopener noreferrer" target="_blank">
-                        <img src={facebook} alt="Facebook" className={classes.Icon}/>
-                    </Grid>
-                    <Grid item component={"a"} href="http://www.twitter.com" rel="noopener noreferrer" target="_blank">
-                        <img src={twitter} alt="twitter" className={classes.Icon}/>
-                    </Grid>
-                    <Grid item component={"a"} href="http://www.instagram.com" rel="noopener noreferrer" target="_blank">
-                        <img src={instagram} alt="instagram" className={classes.Icon} />
-                    </Grid>
-                </Grid>
+                
             </footer>
         </div>
     )

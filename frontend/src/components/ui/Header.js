@@ -18,7 +18,6 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 
-import logo from '../../assets/logo.svg'
 
     function ElevationScroll(props) {
         const { children, window } = props;
@@ -45,22 +44,7 @@ import logo from '../../assets/logo.svg'
                 marginBottom: "1.5em"
             }
           },
-          logo: { 
-              height: "8em",
-              [theme.breakpoints.down("md")]: {
-                height: "7em"
-            },
-            [theme.breakpoints.down("xs")]: {
-                height: "5.5em",
-            }
-          },
           
-          logoContainer: {
-              padding: 0,
-              "&:hover": {
-                  backgroundColor: "transparent"
-              }
-          },
           tabContainer: {
               marginLeft: "auto"
           },
@@ -255,10 +239,7 @@ import logo from '../../assets/logo.svg'
         <ElevationScroll {...props}>
         <AppBar position="fixed">
             <ToolBar disableGutters>
-                <Button component={Link} to="/" className={classes.logoContainer}
-                onClick={()=>props.setValue(0)} disableRipple>
-                <img className={classes.logo} src={logo} alt="Company Logo"/>
-                </Button>
+                
                 {matches ? drawer : tabs}
                 
             </ToolBar>
