@@ -18,5 +18,5 @@ app.use("/api", employer)
 
 
 mongoose.connect(process.env.MONGO)
-.then(app.listen(process.env.PORT))
+.then(app.listen(5000))
 .catch(err=>console.log(err))

@@ -6,6 +6,8 @@ import Landing from './Landing'
 import Registration from './ui/pages/Registration'
 import EmployerReg from './ui/pages/EmployerReg'
 import CandidateReg from './ui/pages/CandidateReg'
+import CandidateDashboard from './ui/pages/CandidateDashboard'
+import EmployerDashboard from './ui/pages/EmployerDashboard'
 import Login from './ui/pages/Login'
 import Contact from './ui/pages/Contact'
 import About from './ui/pages/About'
@@ -24,9 +26,12 @@ function App() {
           <Route exact path="/registration" component={Registration}/>
           <Route exact path="/employer" component={EmployerReg}/>
           <Route exact path="/candidate" component={CandidateReg}/>
-          <Route exact path="/login" component={Login}/>
+          <Route exact path="/candidate/login" component={Login}/>
+          <Route exact path="/employer/login" component={Login}/>
           <Route exact path="/about" component={About}/>
           <Route exact path="/contact" component={Contact}/>
+          <Route exact path="/employer/dashboard" component={EmployerDashboard}/>
+          <Route exact path="/candidate/dashboard" component={CandidateDashboard}/>
         </Switch>
         <Footer value={value} setValue={setValue} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex}/>
       </Router>

@@ -147,7 +147,7 @@ import ListItemText from '@material-ui/core/ListItemText'
                 props.setValue(1)
                 props.setSelectedIndex(0)
             }
-            if(window.location.pathname === "/login" && props.value !== 2){
+            if(window.location.pathname === "/candidate/login" && props.value !== 2){
                 props.setValue(2)
             }
             if(window.location.pathname === "/about" && props.value !== 3){
@@ -183,7 +183,7 @@ import ListItemText from '@material-ui/core/ListItemText'
                         aria-haspopup={anchorEl ? "true" :undefined}
                         onMouseOver={event => handleClick(event)}
                     />
-                    <Tab className={classes.tab} component={Link} to="/login" label="Login"/>
+                    <Tab className={classes.tab} component={Link} to="/candidate/login" label="Login"/>
                     <Tab className={classes.tab} component={Link} to="/about" label="About Us"/>
                     <Tab className={classes.tab} component={Link} to="/contact" label="Contact  Us"/>
                 </Tabs>
@@ -217,7 +217,7 @@ import ListItemText from '@material-ui/core/ListItemText'
                     <ListItem onClick={()=>{setOpenDrawer(false); props.setValue(1)}} divider button component={Link} to="/registration" selected={props.value === 1 }>
                         <ListItemText className={classes.drawerItem}>Registration</ListItemText>
                     </ListItem>
-                    <ListItem onClick={()=>{setOpenDrawer(false); props.setValue(2)}} divider button component={Link} to="/login" selected={props.value === 2 }>
+                    <ListItem onClick={()=>{setOpenDrawer(false); props.setValue(2)}} divider button component={Link} to="/candidate/login" selected={props.value === 2 }>
                         <ListItemText className={classes.drawerItem}>Login</ListItemText>
                     </ListItem>
                     <ListItem onClick={()=>{setOpenDrawer(false); props.setValue(3)}} divider button component={Link} to="/about" selected={props.value === 3 }>

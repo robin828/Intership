@@ -51,22 +51,22 @@ if (!errors.isEmpty()) {
 }
 const { email, password } = req.body; 
 
-let existingUser;
+let existingCandidate;
 try {
-    existingUser = await User.findOne({email})
+    existingCandidate = await Candidate.findOne({email})
 } catch (error) {
   return res.status(400).send('something went wrong')
 }
-if(!existingUser){
-  return res.status(400).send('User does not exist please sign up first')
+if(!existingCandidate){
+  return res.status(400).send('Candidate does not exist please sign up first')
 }
-const validPassword = await bcrypt.compare(password, existingUser.password)
+const validPassword = await bcrypt.compare(password, existingCandidate.password)
 if(!validPassword){
     return res.status(400).send("Invalid Password")
 }
 //creating token
 try {
-  const token = JWT.sign({_id: existingUser._id}, "shjvshfu")
+  const token = JWT.sign({_id: existingCandidate._id}, "shjvshfu")
 res.header('auth-token', token).send(token)    
 } catch (error) {
     console.log(error)

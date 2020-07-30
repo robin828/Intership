@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import {Redirect} from 'react-router-dom'
+import Axios from 'axios';
+import EmployerDashboard from './EmployerDashboard'
+import CandidateDashboard from './CandidateDashboard'
+import {BrowserRouter as Router, Switch} from 'react-router-dom'
 
 function Copyright() {
   return (
@@ -48,7 +53,42 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
   const classes = useStyles();
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [cadidateToken, setCandidateToken] = useState("")
+  const [employerToken, setEmployerToken] = useState("")
+  const [user, setUser] = useState("")
 
+  const login = async (e) => {
+    e.preventDefault()
+    console.log("token")
+    if(window.location.pathname === "/employer/login"){
+      await Axios.post('http://localhost:5000/api/employer/login', {
+      email, password
+    }).then((response)=>setEmployerToken(response.data)).catch(err=>console.log(err))
+    if(employerToken){
+      console.log(employerToken)
+      localStorage.setItem('token', employerToken)
+    }
+    }
+    else if(window.location.pathname === "/candidate/login"){
+      await Axios.post('http://localhost:5000/api/candidate/login', {
+      email, password
+    }).then((response)=>setCandidateToken(response.data)).catch(err=>console.log(err))
+    if(cadidateToken){
+      console.log(cadidateToken)
+      localStorage.setItem('token', cadidateToken)
+      
+    }
+    }
+  }
+  if(cadidateToken){
+    return <Redirect to="/employer/dashboard"/>
+  }
+  else if(employerToken){
+    return <Redirect to="/candidate/dashboard"/> 
+  }
+  else{
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -59,10 +99,11 @@ export default function Login() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={login}>
           <TextField
             variant="outlined"
             margin="normal"
+            onChange={(e)=>setEmail(e.target.value)}
             required
             fullWidth
             id="email"
@@ -74,6 +115,7 @@ export default function Login() {
           <TextField
             variant="outlined"
             margin="normal"
+            onChange={(e)=>setPassword(e.target.value)}
             required
             fullWidth
             name="password"
@@ -82,10 +124,21 @@ export default function Login() {
             id="password"
             autoComplete="current-password"
           />
-          <FormControlLabel
+          <Grid container>
+            <Grid item xs>
+            <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
+            </Grid>
+            <Grid item>
+              <Link href="/employer/login" variant="body2">
+                {"Login as Employer"}
+              </Link>
+            </Grid>
+          </Grid>
+          
+
           <Button
             type="submit"
             fullWidth
@@ -114,4 +167,5 @@ export default function Login() {
       </Box>
     </Container>
   );
+}
 }
