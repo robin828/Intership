@@ -15,11 +15,11 @@ const employerSchema = mongoose.Schema({
         max: 1024,
         min: 6
     },
-    Cname: {
+    companyname: {
         type: String,
         required: true,
     }
 })
 
 
-mongoose.model('Employer', employerSchema)
+module.exports = mongoose.model('Employer', employerSchema)

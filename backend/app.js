@@ -2,7 +2,7 @@ const app = require('express')();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const candidate = require('./routes/candidate-routes')
-const employer = require('./controllers/employer-controllers')
+const employer = require('./routes/employer-routes')
 
 app.use((req, res, next)=>{
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -14,7 +14,7 @@ app.use((req, res, next)=>{
 app.use(bodyParser.json());
 
 app.use("/api", candidate)
-//app.use("/api", employer)
+app.use("/api", employer)
 
 
 mongoose.connect('mongodb+srv://robin19093:robin19093@cluster0-tfdhd.mongodb.net/internship?retryWrites=true&w=majority')

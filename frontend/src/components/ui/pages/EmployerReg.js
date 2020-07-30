@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Axios from 'axios';
+
 
 function Copyright() {
   return (
@@ -48,6 +50,21 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EmployerReg() {
   const classes = useStyles();
+  const [name, setName] = React.useState("")
+  const [email, setEmail] = React.useState("")
+  const [password, setPassword] = React.useState("")
+  const [companyname, setCompanyname] = React.useState("")
+
+  const signup = async (e) => {
+    e.preventDefault()
+    await Axios.post("http://localhost:5000/api/employer", {
+        name,
+        email,
+        password,
+        companyname
+    }).then(response=>console.log(response))
+    .catch(error=>console.log(error));
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -59,10 +76,11 @@ export default function EmployerReg() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={signup}>
         <TextField
             variant="outlined"
             margin="normal"
+            onChange={(e)=>{setName(e.target.value)}}
             required
             fullWidth
             id="name"
@@ -74,6 +92,7 @@ export default function EmployerReg() {
           <TextField
             variant="outlined"
             margin="normal"
+            onChange={(e)=>{setEmail(e.target.value)}}
             required
             fullWidth
             id="email"
@@ -85,6 +104,7 @@ export default function EmployerReg() {
           <TextField
             variant="outlined"
             margin="normal"
+            onChange={(e)=>{setPassword(e.target.value)}}
             required
             fullWidth
             name="password"
@@ -96,12 +116,13 @@ export default function EmployerReg() {
           <TextField
             variant="outlined"
             margin="normal"
+            onChange={(e)=>{setCompanyname(e.target.value)}}
             required
             fullWidth
-            id="Cname"
+            id="companyname"
             label="Company Name "
-            name="Cname"
-            autoComplete="Cname"
+            name="companyname"
+            autoComplete="companyname"
             autoFocus
             />
           <FormControlLabel
@@ -117,23 +138,8 @@ export default function EmployerReg() {
           >
             Sign In
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
         </form>
       </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
     </Container>
   );
 }

@@ -1,6 +1,6 @@
 const express = require('express')
 const {signup} = require('../controllers/candidate-controllers')
-const { body, check } = require('express-validator');
+const { check } = require('express-validator');
 
 
 const route = express.Router();
