@@ -17,6 +17,6 @@ app.use("/api", candidate)
 app.use("/api", employer)
 
 
-mongoose.connect('mongodb+srv://robin19093:robin19093@cluster0-tfdhd.mongodb.net/internship?retryWrites=true&w=majority')
-.then(app.listen(5000))
+mongoose.connect(process.env.MONGO)
+.then(app.listen(process.env.PORT))
 .catch(err=>console.log(err))
