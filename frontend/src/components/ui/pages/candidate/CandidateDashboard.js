@@ -1,9 +1,10 @@
 import React from 'react'
+import Dashboard from '../candidate/dashboard/Dashboard'
 
 const CandidateDashboard = () => {
     return (
         <div>
-            afassd
+            <Dashboard />
         </div>
     )
 }

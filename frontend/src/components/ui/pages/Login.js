@@ -14,9 +14,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {Redirect} from 'react-router-dom'
 import Axios from 'axios';
-import EmployerDashboard from './EmployerDashboard'
-import CandidateDashboard from './CandidateDashboard'
-import {BrowserRouter as Router, Switch} from 'react-router-dom'
 
 function Copyright() {
   return (
@@ -57,7 +54,6 @@ export default function Login() {
   const [password, setPassword] = useState("")
   const [cadidateToken, setCandidateToken] = useState("")
   const [employerToken, setEmployerToken] = useState("")
-  const [user, setUser] = useState("")
 
   const login = async (e) => {
     e.preventDefault()

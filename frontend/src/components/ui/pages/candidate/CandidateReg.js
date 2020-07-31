@@ -3,8 +3,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -13,8 +11,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Axios from 'axios';
-
-
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -53,15 +49,16 @@ export default function EmployerReg() {
   const [name, setName] = React.useState("")
   const [email, setEmail] = React.useState("")
   const [password, setPassword] = React.useState("")
-  const [companyname, setCompanyname] = React.useState("")
+  const [experience, setExperince] = React.useState("")
 
+    
   const signup = async (e) => {
     e.preventDefault()
-    await Axios.post("http://localhost:5000/api/employer", {
+    await Axios.post("http://localhost:5000/api/candidate", {
         name,
         email,
         password,
-        companyname
+        experience
     }).then(response=>console.log(response))
     .catch(error=>console.log(error));
   }
@@ -79,8 +76,8 @@ export default function EmployerReg() {
         <form className={classes.form} onSubmit={signup}>
         <TextField
             variant="outlined"
-            margin="normal"
             onChange={(e)=>{setName(e.target.value)}}
+            margin="normal"
             required
             fullWidth
             id="name"
@@ -116,30 +113,43 @@ export default function EmployerReg() {
           <TextField
             variant="outlined"
             margin="normal"
-            onChange={(e)=>{setCompanyname(e.target.value)}}
+            onChange={(e)=>{setExperince(e.target.value)}}
             required
             fullWidth
-            id="companyname"
-            label="Company Name "
-            name="companyname"
-            autoComplete="companyname"
-            autoFocus
-            />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+            name="experience"
+            label="Work Experience"
+            type="experience"
+            id="experience"
+            autoComplete="experience"
           />
+          
           <Button
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            onSubmit
           >
-            Sign In
+            Sign Up
           </Button>
+          <Grid container>
+            <Grid item xs>
+              <Link href="#" variant="body2">
+                Forgot password?
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link href="#" variant="body2">
+                {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
+          </Grid>
         </form>
       </div>
+      <Box mt={8}>
+        <Copyright />
+      </Box>
     </Container>
   );
 }
