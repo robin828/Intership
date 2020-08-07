@@ -194,7 +194,7 @@ import ListItemText from '@material-ui/core/ListItemText'
                 elevation={0}
                 >
                     {menuOptions.map((options, i)=>(
-                        <MenuItem to={options.link} key={options} component={Link} selected={i===props.selectedIndex && props.value===1} 
+                        <MenuItem to={options.link} key={i} component={Link} selected={i===props.selectedIndex && props.value===1} 
                         classes={{root: classes.menuItem}} 
                         onClick={(event)=>{handleMenuItemCLick(event, i); props.setValue(1); handleClose()}}
                         >

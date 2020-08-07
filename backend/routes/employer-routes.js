@@ -1,6 +1,6 @@
 const express = require('express')
-const {signup, login} = require('../controllers/employer-controllers')
-const { body, check } = require('express-validator');
+const {signup, login, postJobs} = require('../controllers/employer-controllers')
+const { check } = require('express-validator');
 
 
 const route = express.Router();
@@ -14,7 +14,19 @@ route.post('/employer/login', [
     check('email').isEmail().withMessage("Please Enter Valid Email orr Password").notEmpty().withMessage("Please Enter Valid Email orr Password"),
     check('password').isLength({min: 6}).withMessage('Please Enter Valid Email orr Password')
 ], login)
-route.get('/postedjobs', )
+route.post('/postjobs', [
+    check('name').isString().notEmpty().withMessage("Name Required"),
+    check('jobType').isString().notEmpty().withMessage("Please Fill Job Type"),
+    check('startDate').isString().notEmpty().withMessage("Please Fill Start Date"),
+    check('duration').isString().notEmpty().withMessage("Please Fill Duration"),
+    check('stipend').isNumeric().notEmpty().withMessage("Please Fill Stipend"),
+    check('workType').isString().notEmpty().withMessage("Please Fill Work"),
+    check('skillsRequired').isString().notEmpty().withMessage("Please Fill Skills Required"),
+    check('whoCanApply').isString().notEmpty().withMessage("Please Fill Info for Apllicants"),
+    check('vaccancy').isNumeric().notEmpty().withMessage("Please Fill Vaccancy"),
+    check('perks').isString().notEmpty().withMessage("Please Fill Perks"),
+    check('aboutWork').isString().notEmpty().withMessage("Explain Work in detail"),
+],postJobs)
 route.get('/acceptedjobs', )
 route.get('/rejectedjobs', )
 

@@ -48,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 export default function Login() {
   const classes = useStyles();
   const [email, setEmail] = useState("")
@@ -79,10 +80,10 @@ export default function Login() {
     }
   }
   if(cadidateToken){
-    return <Redirect to="/employer/dashboard"/>
+    return <Redirect to="/candidate/dashboard"/>
   }
   else if(employerToken){
-    return <Redirect to="/candidate/dashboard"/> 
+    return <Redirect to="/employer/dashboard"/> 
   }
   else{
   return (
