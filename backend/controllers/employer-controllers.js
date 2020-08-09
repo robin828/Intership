@@ -3,6 +3,8 @@ const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs')
 const PostJob = require('../models/post-jobs')
 const JWT = require('jsonwebtoken')
+const mongoose = require('mongoose');
+
 
 const signup = async (req, res, next) => {
   
@@ -76,26 +78,43 @@ if(!validPassword){
 //creating token
 try {
   const token = JWT.sign({_id: existingEmployer._id}, "shjvshfu")
-res.header('auth-token', token).send(token)    
+  res.header(
+    'auth_token', token
+     ).json({
+      auth_token: token,
+      userId: existingEmployer._id
+     })
+  next(); 
 } catch (error) {
     console.log(error)
-  return res.status(400).send('something went wrong1')
+  return res.status(400).send('something went fgh')
 }
-res.send("logged in")
-
 }
 const postJobs = async(req, res, next) => {
-  console.log("xdfgchvjb")
-  const { name, jobType, startDate, duration, stipend, workType, aboutWork, skillsRequired, whoCanApply, vaccancy, perks } = req.body;
+  const { name, jobType, startDate, duration, stipend, workType, aboutWork, skillsRequired, whoCanApply, vaccancy, perks, userId } = req.body;
   const newJob = new PostJob({
-    name, jobType, startDate, duration, stipend, workType, aboutWork, skillsRequired, whoCanApply, vaccancy, perks
+    name, jobType, startDate, duration, stipend, workType, aboutWork, skillsRequired, whoCanApply, vaccancy, perks, userId
   })
-  console.log("xdfgchvjb2")
+
+  let employer;
+  try {
+    employer = await Employer.findById(userId)
+  } catch (error) {
+    console.log(error)
+    return res.status(500).send('something went gfg')
+  }
+
+  if(!employer){
+    return res.status(404).send('Employer Not Found')
+  }
 
   try {
-    console.log("xdfgchvjb1")
-
-    await newJob.save()
+    const sess = await mongoose.startSession();
+    sess.startTransaction();
+    await newJob.save({ session: sess });
+    employer.jobs.push(newJob);
+    await employer.save({ session: sess })
+    await sess.commitTransaction();
 } catch (error) {
     const err = new Error('could not post job try again')
     return next(err)

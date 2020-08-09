@@ -32,7 +32,7 @@ const postJobSchema = mongoose.Schema({
         required: true,
     },
     skillsRequired: {
-        type: String,
+        type: Array,
         required: true
     },
     whoCanApply: {
@@ -47,6 +47,9 @@ const postJobSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    userId: {
+        type: mongoose.Types.ObjectId, required: true, ref: 'Employer'
+    }
 })
 
 module.exports = mongoose.model('PostJob', postJobSchema)

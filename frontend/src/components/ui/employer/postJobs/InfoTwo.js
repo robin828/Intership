@@ -1,10 +1,12 @@
-import React from 'react'
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';import TextField from '@material-ui/core/TextField';
+import React, {useState, useEffect} from 'react'
+import TextField from '@material-ui/core/TextField';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import {makeStyles} from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Container } from '@material-ui/core';
+import { skills } from '../SkillsAndSelect';
+import Select from 'react-select';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -25,11 +27,17 @@ const useStyles = makeStyles((theme) => ({
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
+    skill:{
+      width: "100%",
+      height:"1.1876em"
+    }
   }));
 
 
 const FormPersonalDetails = (props) => {
     const classes = useStyles();
+    const [skill, setSkill] = useState([]);
+    
     const countinue = (e) => {
         e.preventDefault();
         props.nextStep();
@@ -38,6 +46,19 @@ const FormPersonalDetails = (props) => {
         e.preventDefault();
         props.prevStep();
     }
+    const handleChangedSkill = (value) => {
+      //console.log(value)
+      const skillArray = [];
+      value.map((skill)=>{
+        skillArray.push(skill.value)
+        ;
+      })
+      props.setSkillsRequired(skillArray);
+      
+    } 
+    console.log(props.skillsRequired)
+    
+    
     return (
         
             <>
@@ -75,16 +96,18 @@ const FormPersonalDetails = (props) => {
                     fullWidth
                 />
                 <br />
-                <TextField 
-                    helperText="Enter aboutWork"
-                    onChange={(e)=>{props.setSkillsRequired(e.target.value)}}
-                    defaultValue={props.skillsRequired}
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
+                <Select
+                  defaultValue={[skills[0]]}
+                  isMulti
+                  name="skill"
+                  options={skills}
+                  defaultValue="Skills"
+                  className="basic-multi-select"
+                  classNamePrefix="select"
+                  style={{marginBottom: "1.876em"}}
+                    className={classes.skill}
+                    onChange={handleChangedSkill}
                 />
-                <br />
                 
                 <Button
             type="submit"

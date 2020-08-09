@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -25,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
+    whoCanApply: {
+        width: "100%",
+        height:"1.1876em"
+    }
   }));
 
 
@@ -49,15 +54,12 @@ const InfoThree = (props) => {
       <CssBaseline />
       <div className={classes.paper}>
                 <AppBar primary={false} style={{hieght: "20px"}} title="Enter User Details" />
-                <TextField 
-                    helperText="Enter occupation"
-                    onChange={(e)=>{props.setWhoCanApply(e.target.value)}}
-                    defaultValue={props.whoCanApply}
-                    required
-                    fullWidth
-                    variant="outlined"
-                    margin="normal"
-                />
+                <TextareaAutosize
+                 aria-label="empty textarea"
+                  placeholder="Empty"
+                  onChange={(e)=>{props.setWhoCanApply(e.target.value)}}
+                  className={classes.whoCanApply}
+                  style={{height: "60px"}} />
                 <br />
                 <TextField 
                     helperText="Enter Bio"

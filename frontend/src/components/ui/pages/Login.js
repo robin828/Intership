@@ -51,10 +51,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
   const classes = useStyles();
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [cadidateToken, setCandidateToken] = useState("")
-  const [employerToken, setEmployerToken] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [cadidateToken, setCandidateToken] = useState("");
+  const [employerId, setEmployerId] = useState("");
 
   const login = async (e) => {
     e.preventDefault()
@@ -62,11 +62,10 @@ export default function Login() {
     if(window.location.pathname === "/employer/login"){
       await Axios.post('http://localhost:5000/api/employer/login', {
       email, password
-    }).then((response)=>setEmployerToken(response.data)).catch(err=>console.log(err))
-    if(employerToken){
-      console.log(employerToken)
-      localStorage.setItem('token', employerToken)
-    }
+    }).then((response)=>{setEmployerId(response.data.userId)
+    console.log(response.data)
+    localStorage.setItem('employerId', response.data.userId)
+    localStorage.setItem('token', response.data.auth_token)}).catch(err=>console.log(err))
     }
     else if(window.location.pathname === "/candidate/login"){
       await Axios.post('http://localhost:5000/api/candidate/login', {
@@ -75,14 +74,13 @@ export default function Login() {
     if(cadidateToken){
       console.log(cadidateToken)
       localStorage.setItem('token', cadidateToken)
-      
     }
     }
   }
   if(cadidateToken){
     return <Redirect to="/candidate/dashboard"/>
   }
-  else if(employerToken){
+  else if(employerId){
     return <Redirect to="/employer/dashboard"/> 
   }
   else{

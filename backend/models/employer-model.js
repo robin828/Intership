@@ -18,7 +18,10 @@ const employerSchema = mongoose.Schema({
     companyname: {
         type: String,
         required: true,
-    }
+    },
+    jobs: [{
+        type: mongoose.Types.ObjectId, required: true, ref: 'PostJob' 
+    }]
 })
 
 

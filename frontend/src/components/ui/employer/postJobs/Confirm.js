@@ -21,13 +21,18 @@ const useStyles = makeStyles((theme) => ({
 
 const Confirm = (props) => {
     const classes = useStyles();
-
+    
     const {name, jobType, startDate, duration, stipend, workType, aboutWork, skillsRequired, whoCanApply, vaccancy, perks} = props
 
     const Submit = async (e) => {
         e.preventDefault();
+        console.log(localStorage.getItem('userId'))
         await Axios.post("http://localhost:5000/api/postjobs",{
-            name, jobType, startDate, duration, stipend, workType, aboutWork, skillsRequired, whoCanApply, vaccancy, perks
+            name, jobType, startDate, duration, stipend, workType, aboutWork, skillsRequired, whoCanApply, vaccancy, perks, userId:localStorage.getItem('employerId')
+        }, {
+          headers: {
+            'auth_token': localStorage.getItem('token')
+          }
         }).then(res=>console.log(res)).catch(err=>console.log(err))
     }
     const previous = (e) => {
