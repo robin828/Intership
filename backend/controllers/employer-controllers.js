@@ -122,7 +122,28 @@ const postJobs = async(req, res, next) => {
 res.send("Job Posted succesfully")
 }
 
+const postedjobs = async (req, res, next) => {
+
+  const employerId = req.params.id;
+
+  let jobWithEmployer;
+  try {
+    jobWithEmployer = await Employer.findById(employerId).populate('jobs')
+  } catch (error) {
+    const err = new Error('could not post job try again')
+    return next(err)
+  }
+  if( !jobWithEmployer || jobWithEmployer.jobs.length === 0 ) {
+    const err = new Error('Could not find employer')
+    return next(err)
+  }
+  res.json({
+    jobs: jobWithEmployer.jobs.map(employer => employer.toObject({ getters: true }))
+  });
+};
+
 exports.signup = signup
 exports.login = login
 exports.postJobs = postJobs
+exports.postedjobs = postedjobs
 

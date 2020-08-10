@@ -14,6 +14,7 @@ import theme from './ui/Theme'
 import {BrowserRouter as Router ,Route, Switch} from "react-router-dom"
 import EmployerProfile from './ui/employer/EmployerProfile';
 import PostJob from './ui/employer/PostJob';
+import PostedJob from './ui/employer/PostedJob';
 import JobStatus from './ui/employer/JobStatus';
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
           <Route exact path="/employer/dashboard" component={EmployerDasboard}/>
           <Route exact path="/employer/profile" component={EmployerProfile}/>
           <Route exact path="/postjob" component={PostJob} />
+          <Route exact path="/postedjobs" component={PostedJob} />
           <Route exact path="/jobstatus" component={JobStatus} />
         </Switch>
         <Footer value={value} setValue={setValue} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex}/>

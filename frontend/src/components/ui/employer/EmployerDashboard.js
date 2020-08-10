@@ -83,6 +83,14 @@ export default function EmployerDasboard() {
                       </ListItemText>
               </ListItem>
               </Link>
+              <Link to='/postedjobs' style={{textDecoration: "None"}}>
+              <ListItem button>
+                  <ListItemIcon></ListItemIcon>
+                      <ListItemText >
+                        Posted Jobs
+                      </ListItemText>
+              </ListItem>
+              </Link>
               <Link to="/jobstatus" style={{textDecoration: "None"}}>
               <ListItem button>
                   <ListItemIcon></ListItemIcon>

@@ -1,5 +1,5 @@
 const express = require('express')
-const {signup, login, postJobs} = require('../controllers/employer-controllers')
+const {signup, login, postJobs, postedjobs} = require('../controllers/employer-controllers')
 const { check } = require('express-validator');
 const verify = require('../controllers/verify')
 
@@ -31,7 +31,7 @@ route.post('/postjobs', verify, [
 
 
 
-route.get('/acceptedjobs', )
+route.get('/postedjobs/:id', verify, postedjobs)
 route.get('/rejectedjobs', )
 
 module.exports = route;
