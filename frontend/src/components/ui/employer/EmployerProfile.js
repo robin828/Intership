@@ -3,18 +3,12 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {Redirect} from 'react-router-dom'
 import Axios from 'axios';
-import { Input } from '@material-ui/core';
 
 function Copyright() {
   return (
@@ -48,8 +42,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-
-
 export default function EmployerProfile() {
   const classes = useStyles();
   const [founder, setFounder] = useState("");
@@ -61,13 +53,16 @@ export default function EmployerProfile() {
   const [address, setAddress] = useState("");
   const [companyName, setCompanyName] = useState("");
 
-  const profile = async () => {
-      await Axios.post({
+  const profile = async (e) => {
+      e.preventDefault();
+      await Axios.post('http://localhost:5000/api/employerprofile',{
           founder, coFounder, link, hr, contactEmail, contactNumber, address, companyName
-      })
+      }, {
+        headers: {
+          'auth_token': localStorage.getItem('token')
+        }
+      }).then(res=>console.log(res)).catch(err=>console.log(err));
   }
-
-  
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -163,7 +158,7 @@ export default function EmployerProfile() {
             fullWidth
             name="number"
             label="Contact Number"
-            type="number"
+            type="text"
             id="number"
             autoComplete="number"
           />

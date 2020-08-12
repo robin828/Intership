@@ -1,7 +1,7 @@
 const express = require('express')
-const {signup, login, postJobs, postedjobs} = require('../controllers/employer-controllers')
+const {signup, login, postJobs, postedjobs, employerProfile, totaljobs} = require('../controllers/employer-controllers')
 const { check } = require('express-validator');
-const verify = require('../controllers/verify')
+const verify = require('../controllers/verify');
 
 
 const route = express.Router();
@@ -31,7 +31,20 @@ route.post('/postjobs', verify, [
 
 
 
-route.get('/postedjobs/:id', verify, postedjobs)
-route.get('/rejectedjobs', )
+route.get('/postedjobs/:id', postedjobs)
+
+
+route.post('/employerprofile', verify, [
+    check('founder').isString().notEmpty().withMessage("Founder"),
+    check('coFounder').isString().notEmpty().withMessage("CoFounder"),
+    check('link').isString().notEmpty().withMessage("link"),
+    check('hr').isString().notEmpty().withMessage("hr"),
+    check('contactEmail').isEmail().notEmpty().withMessage("contactEmail"),
+    check('contactNumber').isEmail().notEmpty().withMessage("contactNumber"),
+    check('address').isEmail().notEmpty().withMessage("address"),
+    check('companyName').isEmail().notEmpty().withMessage("companyName"),
+], employerProfile)
+
+route.get('/totaljob/:id', totaljobs)
 
 module.exports = route;

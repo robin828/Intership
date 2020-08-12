@@ -2,6 +2,7 @@ const Employer = require('../models/employer-model')
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs')
 const PostJob = require('../models/post-jobs')
+const Profile = require('../models/employer-profile')
 const JWT = require('jsonwebtoken')
 const mongoose = require('mongoose');
 
@@ -142,8 +143,54 @@ const postedjobs = async (req, res, next) => {
   });
 };
 
+const employerProfile = async (req, res, next) => {
+  const { founder, coFounder, link, hr, contactEmail, contactNumber, address, companyName } = req.body;
+  const newProfile = new Profile({
+    founder, coFounder, link, hr, contactEmail, contactNumber, address, companyName
+  })
+
+  let existingEmail;
+  try {
+    existingEmail = await Profile.find({contactEmail});
+  } catch (error) {
+    const err = new Error('Could not existingEmail')
+    return next(err)
+  }
+  if(existingEmail.length!==0) {
+    return res.send('email already exist')
+  }
+
+    try {
+      await newProfile.save();
+    } catch (error) {
+      const err = new Error('Could not newProfile')
+    return next(error)
+    }
+  
+  res.send('done')
+}
+
+const totaljobs = async (req, res, next) => {
+  console.log("sgsadgs")
+  const employerId = req.params.id;
+  let jobWithEmployer;
+  try {
+    jobWithEmployer = await Employer.findById(employerId).populate('jobs')
+  } catch (error) {
+    const err = new Error('Something Went Wrong Please Try Again')
+    return next(err)
+  }
+  console.log(jobWithEmployer.jobs.length)
+  res.json({
+    totalJobs: jobWithEmployer.jobs.length
+  })
+
+}
+
 exports.signup = signup
 exports.login = login
 exports.postJobs = postJobs
 exports.postedjobs = postedjobs
+exports.employerProfile = employerProfile
+exports.totaljobs = totaljobs
 
