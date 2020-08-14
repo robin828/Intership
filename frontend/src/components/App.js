@@ -24,6 +24,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <Router>
       <Header value={value} setValue={setValue} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex}/>
+      <EmployerDasboard />
         <Switch>
           <Route exact path="/" component={Landing}/>
           <Route exact path="/registration" component={Registration}/>

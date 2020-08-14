@@ -75,6 +75,9 @@ res.header('auth-token', token).send(token)
 res.send("logged in")
 
 }
+const alljobs = async (req, res, next) => {
+  
+}
 
 exports.signup = signup
 exports.login = login

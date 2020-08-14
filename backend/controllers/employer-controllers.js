@@ -180,6 +180,15 @@ const totaljobs = async (req, res, next) => {
     const err = new Error('Something Went Wrong Please Try Again')
     return next(err)
   }
+  let profileChecker;
+  try {
+    profileChecker = await Profile.find(contactEmail)
+  } catch (error) {
+    console.log("Profile Checker error");
+    console.log(error);
+  }
+
+  console.log(profileChecker);
   console.log(jobWithEmployer.jobs.length)
   res.json({
     totalJobs: jobWithEmployer.jobs.length
