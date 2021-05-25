@@ -29,7 +29,6 @@ const signup = async (req, res, next) => {
     name,email,password: hashedPassword, companyname
 })
 
-
     let existingEmployer;
 
     try {
@@ -127,6 +126,7 @@ const postedjobs = async (req, res, next) => {
 
   const employerId = req.params.id;
 
+
   let jobWithEmployer;
   try {
     jobWithEmployer = await Employer.findById(employerId).populate('jobs')
@@ -166,7 +166,6 @@ const employerProfile = async (req, res, next) => {
       const err = new Error('Could not newProfile')
     return next(error)
     }
-  
   res.send('done')
 }
 
@@ -187,7 +186,6 @@ const totaljobs = async (req, res, next) => {
     console.log("Profile Checker error");
     console.log(error);
   }
-
   console.log(profileChecker);
   console.log(jobWithEmployer.jobs.length)
   res.json({

@@ -54,26 +54,7 @@ const Landing = () => {
       };
     return (
         <>
-            <Grid container direction="column">
-                <Grid item>
-                    <Grid container justify="flex-end" alignItems="center" direction="row">
-                        <Grid sm item>
-                            <Typography align="center" variant="h2">Bringing West Coast Technology<br />to the Midwest</Typography>
-                            <Grid container justify="center">
-                                <Grid item className={classes.buttonContainer}>
-                                    <Button className={classes.estimateButton} variant="contained">Free Estimste</Button>
-                                </Grid>
-                                <Grid item>
-                                    <Button className={classes.learnButton} variant="outlined">Learn More</Button>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                        <Grid className={classes.animation} sm item>
-                            <Lottie options={defaultOptions} height={"100%"} width={"100%"} /> 
-                        </Grid>                           
-                    </Grid>
-                </Grid>
-            </Grid>
+            
         </>
     )
 }
